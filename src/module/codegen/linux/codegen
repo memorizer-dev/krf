@@ -29,7 +29,7 @@ end.to_h
 
 SOURCE_DIR = File.expand_path "../../#{PLATFORM}", __dir__
 
-KERNEL_CONFIG = "/lib/modules/#{RELEASE}/build/.config"
+KERNEL_CONFIG = "#{ENV['KDIR']}/.config"
 
 abort "Barf: Missing config for #{RELEASE}: #{KERNEL_CONFIG}" unless File.file? KERNEL_CONFIG
 

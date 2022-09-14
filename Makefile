@@ -1,5 +1,6 @@
 export CFLAGS := -std=gnu99 -Wall -Werror -pedantic
 export PLATFORM := $(shell uname -s | tr '[:upper:]' '[:lower:]')
+export KDIR := /mnt/linux
 
 CLANG_FORMAT := clang-format
 ALL_SRCS := $(shell find . -type f \( -name '*.c' -o -name '*.h' \))

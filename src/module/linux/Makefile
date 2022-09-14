@@ -17,7 +17,7 @@ all: module
 
 .PHONY: module
 module: ../codegen/linux/.linux.mk
-	$(MAKE) -C /lib/modules/$(shell uname -r)/build M=$(shell pwd) modules
+	$(MAKE) -C $(KDIR) M=$(shell pwd) modules
 
 .PHONY: codegen
 codegen: ../codegen/linux/.linux.mk
@@ -27,13 +27,13 @@ codegen: ../codegen/linux/.linux.mk
 	@touch ../codegen/linux/.linux.mk
 
 clean:
-	$(MAKE) -C /lib/modules/$(shell uname -r)/build M=$(shell pwd) clean
+	$(MAKE) -C $(KDIR) M=$(shell pwd) clean
 	rm -f ../*.o *.ur-safe ../*.ur-safe # some garbage not cleaned by the kernel's clean target
 	rm -f *.gen.x *.gen.h */*.gen.h */*.gen.c ../codegen/linux/.linux.mk # codegen files
 
 .PHONY: install
 install: $(MOD).ko
-	sudo $(MAKE) -C /lib/modules/$(shell uname -r)/build M=$(shell pwd) modules_install
+	sudo $(MAKE) -C $(KDIR) M=$(shell pwd) modules_install
 	sudo depmod -a
 
 .PHONY: insmod
